@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # NameNode - HDFS主节点
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    ports:
+      - "9870:9870"
+      - "8020:8020"
+      - "9000:9000"
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+      - .:/opt/code
+      - ./results:/opt/results
+    environment:
+      - CLUSTER_NAME=hadoop-cluster
+      - CORE_CONF_fs_defaultFS=hdfs://172.25.91.110  # ⚠️ 主节点ip
+    env_file:
+      - ./cluster-config/hadoop-master.env
+    network_mode: "host"
+
+  # ResourceManager - YARN资源管理器
+  resourcemanager:
+    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
+    container_name: resourcemanager
+    restart: always
+    ports:
+      - "8088:8088"
+      - "8030:8030"
+      - "8031:8031"
+      - "8032:8032"
+    environment:
+      - SERVICE_PRECONDITION=namenode:8020
+    env_file:
+      - ./cluster-config/hadoop-master.env
+    network_mode: "host"
+    depends_on:
+      - namenode
+
+  # HistoryServer - 作业历史服务器
+  historyserver:
+    image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
+    container_name: historyserver
+    restart: always
+    ports:
+      - "8188:8188"
+    volumes:
+      - hadoop_historyserver:/hadoop/yarn/timeline
+    environment:
+      - SERVICE_PRECONDITION=namenode:8020
+    env_file:
+      - ./cluster-config/hadoop-master.env
+    network_mode: "host"
+    depends_on:
+      - namenode
+      - resourcemanager
+
+volumes:
+  hadoop_namenode:
+  hadoop_historyserver:
