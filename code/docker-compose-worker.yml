@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  # DataNode
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    ports:
+      - "9864:9864"  # DataNode HTTP
+      - "9866:9866"  # DataNode IPC
+      - "9867:9867"  # DataNode HTTPS (可选)
+    volumes:
+      - ./code/data:/hadoop/data
+      - ./code/logs:/hadoop/logs
+      - ./code/scripts:/opt/scripts
+    env_file:
+      - ./cluster-config/hadoop-worker.env
+    network_mode: "host"
+
+  # NodeManager
+  nodemanager:
+    image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
+    container_name: nodemanager
+    restart: always
+    ports:
+      - "8042:8042"   # NodeManager Web UI
+    volumes:
+      - ./code/scripts:/opt/scripts
+    env_file:
+      - ./cluster-config/hadoop-worker.env
+    network_mode: "host"
+
+
