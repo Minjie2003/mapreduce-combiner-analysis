@@ -1,0 +1,7 @@
+实验名称,执行时间(秒),Map输入记录,Map输出记录,Combine输入记录,Combine输出记录,Reduce输入组,Reduce输出记录,数据压缩比
+skewed_with_combiner,100,records=1000000,records=50000000,records=50200000,records=250000,groups=10000,records=10000,
+skewed_without_combiner,732,records=1000000,records=50000000,records=0,records=0,groups=10000,records=10000,
+uniform_with_combiner,122,records=1000000,records=50000000,records=50200000,records=250000,groups=10000,records=10000,
+uniform_without_combiner,224,records=1000000,records=50000000,records=0,records=0,groups=10000,records=10000,
+unique_with_combiner,212,records=1000000,records=50000000,records=97866550,records=97866550,groups=50000000,records=50000000,
+unique_without_combiner,189,records=1000000,records=50000000,records=0,records=0,groups=50000000,records=50000000,
