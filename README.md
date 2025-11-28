@@ -2264,7 +2264,7 @@ scp -r root@192.168.204.132:/export/data/code/results ./code/
 - 在 **Unique** 数据集下，Combiner反而会增加整体的运行时间,带来负优化。 
  
 **图2**
--对于 **Skewed** 和**Uniform**数据集,Combiner 显著减少了 Shuffle 阶段的传输数据量。
+- 对于 **Skewed** 和**Uniform**数据集,Combiner 显著减少了 Shuffle 阶段的传输数据量。
 - 对于 **Unique** 分布（所有 key 都不同），Combiner 几乎无法减少任何记录，Shuffle 大小变化不大。
 
 
