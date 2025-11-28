@@ -2222,9 +2222,9 @@ scp -r root@192.168.204.132:/export/data/code/results ./code/
 
 ####  运行结果
 
-![image-20251126013933483](.docs\images\image-20251126013933483.png)
+![image-20251126013933483](./docs/images/image-20251126013933483.png)
 
-![image-20251126014154273](.docs\images\image-20251126014154273.png)
+![image-20251126014154273](./docs/images/image-20251126014154273.png)
 
 ---
 
@@ -2249,7 +2249,7 @@ scp -r root@192.168.204.132:/export/data/code/results ./code/
 
 下图展示了 Combiner 在不同场景下对 CPU 负载、网络 I/O、磁盘 I/O 的综合影响：
 
-![four_plots_final.png](.docs\images\four_plots_final.png)
+![four_plots_final.png](./docs/images/four_plots_final.png)
 
 
 **图表说明：**
